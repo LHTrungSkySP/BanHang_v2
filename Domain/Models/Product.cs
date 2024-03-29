@@ -1,40 +1,53 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Domain.Models
+namespace Domain.Models;
+
+public partial class Product
 {
-    public class Product : BaseModel
-    {
-        [Column(TypeName = "nvarchar(255)")]
-        public string? Name { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public string? Description { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public string? Content { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public string? Sku { get; set; }
-        [Column(TypeName = "money")]
-        public decimal? Price { get; set; }
-        [Column(TypeName = "float")]
-        public float? DiscountPrice { get; set; }
-        [Column(TypeName = "varchar(255)")]
-        public string? ImageUrl { get; set; }
-        [Column(TypeName = "varchar(255)")]
-        public string? ImageList { get; set; }
-        [Column(TypeName = "int")]
-        public int? ViewCount { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public string? SeoAlias { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public string? SeoTitle { get; set; }
-        [Column(TypeName = "nvarchar(255)")]
-        public string? SeoKeyword { get; set; }
-        [Column(TypeName = "varchar(255)")]
-        public string? SeoDescription { get; set; }
-        [Column(TypeName = "bit")]
-        public bool? IsActive { get; set; }
-        [Column(TypeName = "int")]
-        public int? RateTotal { get; set; }
-        [Column(TypeName = "int")]
-        public int? RateCount { get; set; }
-    }
+    public int Id { get; set; }
+
+    public string Sku { get; set; } = null!;
+
+    public double Price { get; set; }
+
+    public double? DiscountPrice { get; set; }
+
+    public string ImageUrl { get; set; } = null!;
+
+    public string? ImageList { get; set; }
+
+    public int? ViewCount { get; set; }
+
+    public DateTime? CreatedAt { get; set; }
+
+    public Guid? CreatedBy { get; set; }
+
+    public DateTime? UpdatedAt { get; set; }
+
+    public Guid? UpdatedBy { get; set; }
+
+    public bool IsActive { get; set; }
+
+    public int? RateTotal { get; set; }
+
+    public int? RateCount { get; set; }
+
+    public Guid? ObjectId { get; set; }
+
+    public virtual ICollection<AttributeValueDateTime> AttributeValueDateTimes { get; set; } = new List<AttributeValueDateTime>();
+
+    public virtual ICollection<AttributeValueDecimal> AttributeValueDecimals { get; set; } = new List<AttributeValueDecimal>();
+
+    public virtual ICollection<AttributeValueInt> AttributeValueInts { get; set; } = new List<AttributeValueInt>();
+
+    public virtual ICollection<AttributeValueText> AttributeValueTexts { get; set; } = new List<AttributeValueText>();
+
+    public virtual ICollection<AttributeValueVarchar> AttributeValueVarchars { get; set; } = new List<AttributeValueVarchar>();
+
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
+    public virtual ICollection<ProductTranslation> ProductTranslations { get; set; } = new List<ProductTranslation>();
+
+    public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
 }
